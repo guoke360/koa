@@ -24,16 +24,11 @@ app.use(async (ctx, next) => {
 
 // response
 
-app.use(async ctx => {
-    ctx.body = 'Hello World';
+app.use('/login', function *() {
+    yield doReadFile1();
+    var data = yield doReadFile2();
+    this.body = data;
 });
-
-app.context.db = db();
-
-app.use(async ctx => {
-    console.log(ctx.db);
-});
-
 app.on('error', (err, ctx) => {
     log.error('server error', err, ctx)
 });
